@@ -83,9 +83,6 @@ TARGET_KERNEL_SOURCE := kernel/htc/golfu
 TARGET_KERNEL_CONFIG := golfu_defconfig
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 
-# Prebuilt kernel
-#TARGET_PREBUILT_KERNEL := prebuiltkernel/kernel
-
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 32
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
@@ -106,9 +103,7 @@ BOARD_EGL_CFG := device/htc/golfu/proprietary/lib/egl/egl.cfg
 # Wi-Fi
 BOARD_WLAN_DEVICE := ath6kl
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_ath6kl
 BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_ath6kl
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/ath6kl_sdio.ko"
 WIFI_DRIVER_MODULE_NAME := "ath6kl_sdio"

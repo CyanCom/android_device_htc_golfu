@@ -234,12 +234,6 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/usr/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
     device/htc/golfu/proprietary/usr/idc/himax-touchscreen.idc:system/usr/idc/himax-touchscreen.idc
 
-# Prebuilt Modules
-PRODUCT_COPY_FILES += \
-    device/htc/golfu/proprietary/lib/modules/ath6kl_sdio.ko:system/lib/modules/ath6kl_sdio.ko \
-    device/htc/golfu/proprietary/lib/modules/cfg80211.ko:system/lib/modules/cfg80211.ko \
-    device/htc/golfu/proprietary/lib/modules/compat.ko:system/lib/modules/compat.ko
-#    device/htc/golfu/proprietary/lib/modules/kineto_gan.ko:system/lib/modules/kineto_gan.ko
 
 # Proprietary Binaries
 PRODUCT_COPY_FILES += \
