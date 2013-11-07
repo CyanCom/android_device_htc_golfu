@@ -168,4 +168,4 @@ TARGET_PROVIDES_POWERHAL := true
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_FSTAB := device/htc/golfu/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/htc/golfu/fstab.golfu
