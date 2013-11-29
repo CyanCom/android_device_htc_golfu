@@ -119,7 +119,6 @@ COMMON_GLOBAL_CFLAGS += -DHTCLOG
 
 # Releasetools
 TARGET_OTA_EXTRAS_FILE := device/htc/golfu/releasetools/extras.txt
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/htc/golfu/releasetools/ota_from_target_files
 
 # GPS
 BOARD_USES_QCOM_LIBRPC := true
