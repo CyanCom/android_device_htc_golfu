@@ -24,11 +24,13 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libstagefrighthw \
     libOmxCore \
+    libdashplayer \
     libI420colorconvert
 
 ## Graphics 
 PRODUCT_PACKAGES += \
     libgenlock \
+    liboverlay \
     copybit.msm7x27a \
     gralloc.msm7x27a \
     hwcomposer.msm7x27a \
@@ -69,6 +71,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     dexpreopt
+    
+## Bluetooh
+PRODUCT_PACKAGES += \
+    brcm_patchram_plus
 
 ## Hardware properties 
 PRODUCT_COPY_FILES += \
