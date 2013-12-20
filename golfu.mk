@@ -19,14 +19,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/golfu/overlay
 
-# Video decoding
+## Video decoding
 PRODUCT_PACKAGES += \
     libmm-omxcore \
     libstagefrighthw \
     libOmxCore \
     libI420colorconvert
 
-# Graphics 
+## Graphics 
 PRODUCT_PACKAGES += \
     libgenlock \
     copybit.msm7x27a \
@@ -34,7 +34,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm7x27a \
     libtilerenderer
 
-# Audio
+## Audio
 PRODUCT_PACKAGES += \
     audio.primary.msm7x27a \
     audio_policy.msm7x27a \
@@ -43,7 +43,7 @@ PRODUCT_PACKAGES += \
     libaudioutils \
     audio.usb.default
 
-# Other
+## Other
 PRODUCT_PACKAGES += \
     dexpreopt \
     lights.golfu \
@@ -52,12 +52,12 @@ PRODUCT_PACKAGES += \
     librpc \
     power.msm7x27a
    
-# Camera
+## Camera
 PRODUCT_PACKAGES += \
     camera.default \
     libsurfaceflinger_client
 
-# NFC
+## NFC
 PRODUCT_PACKAGES += \
     libnfc \
     libnfc_jni \
@@ -65,12 +65,12 @@ PRODUCT_PACKAGES += \
     Tag \
     com.android.nfc_extras \
 
-# Misc
+## Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     dexpreopt
 
-# Hardware properties 
+## Hardware properties 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
@@ -90,7 +90,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
-# Init
+## Init
 PRODUCT_COPY_FILES += \
     device/htc/golfu/fstab.golfu:root/fstab.golfu \
     device/htc/golfu/prebuilt/root/init:root/init \
@@ -103,7 +103,7 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/prebuilt/root/init.trace.rc:root/init.trace.rc \
     device/htc/golfu/prebuilt/root/logo.rle:root/logo.rle
 
-# Camera
+## Camera
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/hw/camera.default.so:system/lib/hw/camera.default.so \
     device/htc/golfu/proprietary/lib/liboemcamera.so:system/lib/liboemcamera.so \
@@ -123,7 +123,7 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/media_profiles.xml:system/etc/media_profiles.xml \
     device/htc/golfu/proprietary/etc/media_codecs.xml:system/etc/media_codecs.xml
 
-# OMX
+## OMX
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/libmm-adspsvc.so:system/lib/libmm-adspsvc.so \
     device/htc/golfu/proprietary/lib/libmmosal.so:system/lib/libmmosal.so \
@@ -134,7 +134,7 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/libmmparser_divxdrmlib.so:system/lib/libmmparser_divxdrmlib.so \
     device/htc/golfu/proprietary/lib/libdivxdrmdecrypt.so:system/lib/libdivxdrmdecrypt.so
 
-# Publish that we support the live wallpaper feature.
+## Publish that we support the live wallpaper feature.
 PRODUCT_COPY_FILES += \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
@@ -144,19 +144,19 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     librs_jni
 
-# Releasetools
+## Releasetools
 PRODUCT_COPY_FILES += \
      device/htc/golfu/releasetools/extras.sh:system/bin/extras.sh
 
-# Vold
+## Vold
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/vold.fstab:system/etc/vold.fstab
 
-# DRM Plugin
+## DRM Plugin
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/drm/libdrmwvmplugin.so:system/lib/drm/libdrmwvmplugin.so
 
-# Wifi
+## Wifi
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/firmware/ath6k:system/etc/firmware/ath6k \
     device/htc/golfu/proprietary/etc/firmware/ath6k/AR6003:system/etc/firmware/ath6k/AR6003 \
@@ -171,7 +171,7 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/firmware/ath6k/AR6003/hw2.1.1/utf.bin:system/etc/firmware/ath6k/AR6003/hw2.1.1/utf.bin \
     device/htc/golfu/proprietary/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
-# Audio
+## Audio
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
     device/htc/golfu/proprietary/etc/AudioBTID.csv:system/etc/AudioBTID.csv \
@@ -182,11 +182,11 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/libaudioeq.so:system/lib/libaudioeq.so \
     device/htc/golfu/proprietary/lib/libhtc_acoustic.so:system/lib/libhtc_acoustic.so
 
-# Sensors
+## Sensors
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/hw/sensors.golfu.so:system/lib/hw/sensors.golfu.so \
 
-# 3D
+## 3D
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
     device/htc/golfu/proprietary/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw \
@@ -204,16 +204,16 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
     device/htc/golfu/proprietary/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so
 
-# RIL
+## RIL
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/libhtc_ril.so:system/lib/libhtc_ril.so \
     device/htc/golfu/proprietary/lib/libqc-opt.so:system/lib/libqc-opt.so
 
-# NFC firmware
+## NFC firmware
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/libpn544_fw.so:system/vendor/firmware/libpn544_fw.so
 
-# Audio DSP Profiles
+## Audio DSP Profiles
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/soundimage/srs_global.cfg:system/etc/soundimage/srs_global.cfg \
     device/htc/golfu/proprietary/etc/soundimage/srs_bypass.cfg:system/etc/soundimage/srs_bypass.cfg \
@@ -223,7 +223,7 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/soundimage/srs_geq10.cfg:system/etc/soundimage/srs_geq10.cfg \
     device/htc/golfu/proprietary/etc/soundimage/srsfx_trumedia_music.cfg:system/etc/soundimage/srsfx_trumedia_music.cfg
 
-# Keylayouts, ICU & IDCs
+## Keylayouts, ICU & IDCs
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/usr/keylayout/golfu-keypad.kl:system/usr/keylayout/golfu-keypad.kl \
     device/htc/golfu/proprietary/usr/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
@@ -235,7 +235,7 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/usr/idc/himax-touchscreen.idc:system/usr/idc/himax-touchscreen.idc
 
 
-# Proprietary Binaries
+## Proprietary Binaries
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/bluetooth/main.conf:system/etc/bluetooth/main.conf \
     device/htc/golfu/proprietary/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
@@ -267,6 +267,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.use_dithering=1 \
     persist.sys.usb.config=mass_storage,adb \
     ro.vold.umsdirtyratio=20
+
+## Debugging
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.secure=0 \
+    ro.debuggable=1 \
+    ro.adb.secure=0 \
+    persist.service.adb.enable=1
 
 PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
