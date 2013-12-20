@@ -16,6 +16,8 @@
 USE_CAMERA_STUB := true
 BOARD_VENDOR := htc
 
+TARGET_SPECIFIC_HEADER_PATH := device/htc/golfu/include
+
 ## cflags
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP_WITH_GENLOCK
 COMMON_GLOBAL_CFLAGS += -DMSMFB_METADATA_GET
@@ -93,8 +95,8 @@ BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file"
 
 ## Bluetooth
 BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/golfu/bluetooth
-TARGET_SPECIFIC_HEADER_PATH := device/htc/golfu/include
 
 # OpenGL drivers config file path
 BOARD_EGL_CFG := device/htc/golfu/proprietary/lib/egl/egl.cfg
