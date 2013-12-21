@@ -22,4 +22,7 @@
 
     <!-- Disable software HDR on non-hw HDR devices -->
     <bool name="disableSoftwareHDR">true</bool>
+
+    <!-- Allows setting video size before recording starts -->
+    <bool name="needsEarlyVideoSize">true</bool>
 </resources>
