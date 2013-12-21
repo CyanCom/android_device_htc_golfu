@@ -264,18 +264,16 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/xbin/wireless_modem:system/xbin/wireless_modem 
     
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.locationfeatures=1 \
-    ro.com.google.networklocation=1 \
-    ro.com.google.gmsversion=4.0_r2 \
-    dalvik.vm.lockprof.threshold=500 \
     ro.setupwizard.enable_bypass=1 \
     ro.telephony.call_ring.multiple=false \
-    persist.sys.use_dithering=1 \
-    persist.sys.usb.config=mass_storage,adb \
-    ro.vold.umsdirtyratio=20
+    ro.vold.umsdirtyratio=50 \
+    persist.sys.purgeable_assets=1 \
+    ro.telephony.call_ring.delay=3000 \
+    ro.config.low_ram=true \
+    persist.webview.provider=classic
 
 ## Debugging
-PRODUCT_PROPERTY_OVERRIDES += \
+ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0 \
     ro.debuggable=1 \
     ro.adb.secure=0 \
