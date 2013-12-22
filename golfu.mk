@@ -76,7 +76,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     brcm_patchram_plus
 
-## Wi-Fi += \
+## Wi-Fi 
+PRODUCT_PACKAGES += \
     ath6kl_sdio
 
 ## Hardware properties 
@@ -165,8 +166,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/lib/drm/libdrmwvmplugin.so:system/lib/drm/libdrmwvmplugin.so
 
-#Wifi Firmware
-# from kernel.org
+## Wifi Firmware
+## from kernel.org
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/wifi-firmware/ath6k/AR6003/hw2.0/data.patch.bin:/system/etc/firmware/ath6k/AR6003/hw2.0/data.patch.bin \
     device/htc/golfu/proprietary/etc/wifi-firmware/ath6k/AR6003/hw2.0/bdata.SD31.bin:/system/etc/firmware/ath6k/AR6003/hw2.0/bdata.SD31.bin \
@@ -197,7 +198,7 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/wifi-firmware/ath6k/AR6003/hw2.1.1/bdata.SD32.bin:/system/etc/firmware/ath6k/AR6003/hw2.1.1/bdata.CUSTOM.bin \
     device/htc/golfu/proprietary/etc/wifi-firmware/ath6k/AR6003/hw1.0/bdata.SD32.bin:/system/etc/firmware/ath6k/AR6003/hw1.0/bdata.CUSTOM.bin
 
-# Wifi Firmware (hack for selecting proper bdata.bin)
+## Wifi Firmware (hack for selecting proper bdata.bin)
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/wifi-firmware/ath6k/AR6003/hw2.1.1/bdata.SD32.bin:/system/etc/firmware/ath6k/AR6003/hw2.1.1/bdata.bin
 
