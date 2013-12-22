@@ -76,6 +76,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     brcm_patchram_plus
 
+## Wi-Fi += \
+    ath6kl_sdio
+
 ## Hardware properties 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
