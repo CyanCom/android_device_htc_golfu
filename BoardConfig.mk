@@ -67,8 +67,10 @@ BOARD_KERNEL_BASE := 0x13000000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x1200000
 
 ## Additional libraries
+TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_PROVIDES_LIBAUDIO := true
-BOARD_HAVE_HTC_AUDIO := true
+TARGET_QCOM_TUNNEL_LPA_ENABLED := true
+BOARD_QCOM_VOIP_ENABLED := true
 
 ## Fix this up by examining /proc/mtd on a running device
 TARGET_USERIMAGES_USE_EXT4 := true
