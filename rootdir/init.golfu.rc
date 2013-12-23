@@ -7,22 +7,17 @@ on emmc
     devwait emmc@system
     mount ext4 emmc@system /system ro barrier=1
     devwait emmc@userdata
+#   exec /system/bin/e2fsck -p emmc@userdata
     mount ext4 emmc@userdata /data nosuid nodev barrier=1 noauto_da_alloc
     mount ext4 emmc@cache /cache nosuid nodev barrier=1
     mount ext4 emmc@devlog /devlog nosuid nodev barrier=1
 
 on early-init
-    mkdir /storage 0775 system sdcard_r
-    mkdir /storage/sdcard0 0000 system system
-
-    # for backwards compatibility
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-
-    export EXTERNAL_STORAGE /storage/sdcard0
     device mtd@misc 0460 radio diag
 
 on init
+    # double check the perms and set owner
+    # export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar:/system/framework/com.htc.commonctrl.jar:/system/framework/com.htc.framework.jar:/system/framework/com.htc.android.pimlib.jar:/system/framework/com.htc.android.easopen.jar:/system/framework/com.scalado.util.ScaladoUtil.jar:/system/framework/com.orange.authentication.simcard.jar:/system/framework/kafdex.jar
     chown root root /devlog
     chmod 0700 /devlog
 
@@ -30,7 +25,6 @@ on init
     chmod 0771 /data/secure
     mkdir /data/secure/data 0771 system system
     mount tmpfs tmpfs /data/secure/data mode=0771,uid=1000,gid=1000
-    mkdir /mnt/emmc 0000 system system
 
     #set G-Sensor and Compass permissions
     chown compass system /dev/akm8975_aot
@@ -39,6 +33,7 @@ on init
     chmod 0640 /dev/akm8975_aot
     chmod 0640 /dev/akm8975_daemon
     chmod 0640 /dev/bma150
+	mkdir /mnt/emmc 0000 system system
 
 on boot
 # unmap left alt to avoid console switch
@@ -62,36 +57,26 @@ on boot
     chown media audio /data/audio
     chmod 755 /data/audio
 
-#NFC
-    setprop ro.nfc.port "I2C"
-    chmod 0660 /dev/pn544
-    chown nfc nfc /dev/pn544
+# permissions for NFC
+	chmod 0600 /dev/pn544
+	chown nfc nfc /dev/pn544
+	setprop debug.nfc.fw_download "false"
+	setprop debug.nfc.fw_boot_download "false"
 
 # HTC_WIFI_START
-    mkdir /data/system/wpa_supplicant 0771 wifi wifi
-    mkdir /data/misc/wifi 0771 wifi wifi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/wifi/hostap 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0771 wifi wifi
-    chmod 0771 /data/system/wpa_supplicant
-    chmod 0771 /data/misc/wifi
-    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
-    chmod 0771 /data/misc/wifi/sockets
-    chown wifi wifi /data/system/wpa_supplicant
-    chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
-    chown wifi wifi /data/misc/wifi/sockets
-    chown wifi wifi /data/misc/wifi
-
-    mkdir /data/misc/wifi/hostapd 0777 wifi wifi
-
-    mkdir /data/misc/dhcp 0777 dhcp dhcp
-    chmod 0777 /data/misc/dhcp
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-
     insmod /system/lib/modules/compat.ko
     insmod /system/lib/modules/cfg80211.ko
     chown system system /sys/devices/platform/msm_sdcc.2/polling
 
+    #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
+    mkdir /data/system 0775 system system
+    symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 # HTC_WIFI_END
 
     # bluetooth power up/down interface
@@ -143,6 +128,7 @@ on boot
     # Load kineto_gan.ko while booting
     insmod /system/lib/modules/kineto_gan.ko
 
+
     # for fonts move to data partition
     mount yaffs2 mtd@system /system rw remount
     chmod 0755 /data/fonts
@@ -150,33 +136,37 @@ on boot
     mount yaffs2 mtd@system /system ro remount
 
 # wifi ++
+service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl80211 -ddd
+    class late_start
+    user root
+    group wifi inet
+    disabled
+    oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKLG
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     class late_start
     disabled
     oneshot
-
-service iprenew_wlan0 /system/bin/dhcpcd -n
-    disabled
-    oneshot
-
-service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
-    group system wifi
-    disabled
-    oneshot
-
-service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/data/misc/wifi/p2p_supplicant.conf
-    group system wifi
-    disabled
-    oneshot
-
-on property:init.svc.wpa_supplicant=stopped
-    stop dhcpcd_wlan0
 
 service abtfilt /system/bin/abtfilt -d -z -n -q -v -s -w wlan0
     class late_start
     user root
     group bluetooth net_bt_admin inet net_admin net_raw
+    disabled
+    oneshot
+
+service dhcpcd_p2p /system/bin/dhcpcd -ABKL
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class late_start
     disabled
     oneshot
 
@@ -186,12 +176,52 @@ service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
 
 # wifi--
 
+# [3LM] device manager 3LM service
+service tund /system/bin/tund
+    socket tund stream 0660 vpn system
+    user vpn
+    group vpn net_admin net_raw
+    ioprio be 2
+
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
     group qcom_oncrpc bluetooth net_bt_admin
     disabled
     oneshot
+
+#service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
+#    class late_start
+#    disabled
+#    oneshot
+
+#service bt-sap /system/bin/sapd 15
+#    class late_start
+#    disabled
+#    oneshot
+#service sapd /system/bin/sdptool add --handle=0x1ff15 --channel=15 SAP
+#    class late_start
+#    user bluetooth
+#    group bluetooth net_bt_admin
+#    disabled
+#    oneshot
+#service dund /system/bin/sdptool add --handle=0x1ff01 --channel=1 DUN
+#    class late_start
+#    user bluetooth
+#    group bluetooth net_bt_admin
+#    disabled
+#    oneshot
+
+#service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
+#    class late_start
+#    user system
+#    group system inet
+#    disabled
+
+service uim /system/bin/uimqc
+	user root
+	group media bluetooth
+	oneshot
 
 # bugreport is triggered by the KEY_VOLUMEUP and KEY_VOLUMEDOWN keycodes
 service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
@@ -201,26 +231,51 @@ service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
 
 # for USB internet sharing
 service udhcpd /system/bin/udhcpd
-    disabled
-    oneshot
+	disabled
+	oneshot
 
 service netsharing_on /system/bin/netsharing net on
-    disabled
-    oneshot
+	disabled
+	oneshot
 
 service netsharing_off /system/bin/netsharing net off
-    disabled
-    oneshot
+	disabled
+	oneshot
 
 service netsharing_pass /system/bin/netsharing net_pass on
-    disabled
-    oneshot
+	disabled
+	oneshot
 
 service srv_ser2net /system/bin/ser2net -n
     disabled
 
 on property:init.svc.bluetoothd=running
     write /sys/class/bluetooth/hci0/idle_timeout 7000
+
+#service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
+#    class late_start
+#    user bluetooth
+#    group bluetooth net_bt_admin inet net_admin net_raw
+#    disabled
+#    oneshot
+
+#service amp_init /system/bin/amploader -i
+#    class late_start
+#    user root
+#    disabled
+#    oneshot
+
+#service amp_load /system/bin/amploader -l 7000
+#    class late_start
+#    user root
+#    disabled
+#    oneshot
+
+#service amp_unload /system/bin/amploader -u
+#    class late_start
+#    user root
+#    disabled
+#    oneshot
 
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
@@ -302,7 +357,7 @@ service modem /system/xbin/wireless_modem
     user system
     group system radio
     disabled
-    oneshot
+	oneshot
 
 service zchgd_offmode /system/bin/zchgd -pseudooffmode
     user root
@@ -312,7 +367,19 @@ service zchgd_offmode /system/bin/zchgd -pseudooffmode
 service zchgd_onmode /system/bin/zchgd -onmode
     user root
     group root graphics
-    oneshot
+
+on property:dev.zcharge=true
+    start zchgd_onmode
+
+on property:dev.zcharge=false
+    stop zchgd_onmode
+
+#+SSD_RIL: from QCT Fusion
+#service ril-daemon /system/bin/rild
+#    socket rild stream 660 root radio
+#    socket rild-debug stream 660 radio system
+#    user root
+#    group radio cache inet misc audio qcom_oncrpc diag system
 
 service ril-daemon1 /system/bin/rild -c 1
     class late_start
@@ -333,6 +400,23 @@ service dmagent /system/bin/dmagent -N
     group radio cache inet misc
 
 service clockd /system/bin/clockd
+
+service qb_offmode_alarm /system/bin/qb_offmode_alarm
+    user root
+    disabled
+    oneshot
+
+service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
+    user root
+    disabled
+    oneshot
+    ioprio idle 0
+
+service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
+    user root
+    disabled
+    oneshot
+    ioprio idle 0
 
 on property:ro.build.tags=test-keys
     start htc_ebdlogd

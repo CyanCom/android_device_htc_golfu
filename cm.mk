@@ -9,13 +9,9 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/golfu/overlay
 
 # Inherit some common cyanogenmod stuff.
 $(call inherit-product, vendor/cm/config/common_mini_phone.mk)
-$(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/htc/golfu/golfu.mk)
-
-PRODUCT_RELEASE_NAME := Desire C
-PRODUCT_VERSION_DEVICE_SPECIFIC := -golfu
+$(call inherit-product, device/htc/golfu/full_golfu.mk)
 
 # Product name
 PRODUCT_NAME := cm_golfu
