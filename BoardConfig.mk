@@ -195,7 +195,7 @@ TARGET_PROVIDES_POWERHAL := true
 
 ## Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_FSTAB := device/htc/golfu/fstab.golfu
+TARGET_RECOVERY_FSTAB := device/htc/golfu/rootdir/fstab.golfu
 RECOVERY_FSTAB_VERSION := 2
 
 ## FM Radio
