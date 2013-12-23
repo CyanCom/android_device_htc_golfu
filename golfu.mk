@@ -102,6 +102,15 @@ PRODUCT_COPY_FILES += \
 
 ## Init
 PRODUCT_COPY_FILES += \
+    device/htc/golfu/rootdir/default.prop:root/default.prop \
+    device/htc/golfu/rootdir/sbin/adbd:root/sbin/adbd \
+    device/htc/golfu/rootdir/sbin/ueventd:root/sbin/ueventd \
+    device/htc/golfu/rootdir/init.cm.rc:root/init.cm.rc \
+    device/htc/golfu/rootdir/init.trace.rc:root/init.trace.rc \
+    device/htc/golfu/rootdir/init.rc:root/init.rc \
+    device/htc/golfu/rootdir/init.goldfish.rc:root/init.goldfish.rc \
+    device/htc/golfu/rootdir/ueventd.golfish.rc:root/ueventd.goldfish.rc \
+    device/htc/golfu/rootdir/ueventd.rc:root/ueventd.rc \
     device/htc/golfu/rootdir/fstab.golfu:root/fstab.golfu \
     device/htc/golfu/rootdir/init.golfu.rc:root/init.golfu.rc \
     device/htc/golfu/rootdir/init.golfu.usb.rc:root/init.usb.rc \
