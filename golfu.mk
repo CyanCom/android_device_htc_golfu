@@ -105,7 +105,7 @@ PRODUCT_COPY_FILES += \
     device/htc/golfu/rootdir/fstab.golfu:root/fstab.golfu \
     device/htc/golfu/rootdir/init.golfu.rc:root/init.golfu.rc \
     device/htc/golfu/rootdir/init.golfu.usb.rc:root/init.usb.rc \
-    device/htc/golgu/rootdir/ueventd.golfu.rc:root/ueventd.golfu.rc \
+    device/htc/golfu/rootdir/ueventd.golfu.rc:root/ueventd.golfu.rc \
     device/htc/golfu/rootdir/logo.rle:root/logo.rle
 
 ## Camera
