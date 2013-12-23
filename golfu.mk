@@ -197,6 +197,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/wifi-firmware/ath6k/AR6003/hw2.1.1/bdata.SD32.bin:/system/etc/firmware/ath6k/AR6003/hw2.1.1/bdata.bin
 
+
+## Wi-Fi Modules
+PRODUCT_COPY_FILES += \
+    device/htc/golfu/proprietary/lib/modules/ath.ko:system/lib/modules/ath.ko \
+    device/htc/golfu/proprietary/lib/modules/ath6kl_sdio.ko:system/lib/ath6kl_sdio.ko
+
 ## Audio
 PRODUCT_COPY_FILES += \
     device/htc/golfu/proprietary/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
